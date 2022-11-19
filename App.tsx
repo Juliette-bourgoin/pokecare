@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Detail } from './components/detail';
-import { InstaCard } from './components/instaCard';
+import { ReceptionView } from './components/reception';
 import type { RandomImagesJSON, RandomImagesJSON2 } from './types';
 
 const data = require('./random-images.json') as RandomImagesJSON[];
@@ -15,16 +15,7 @@ function Home() {
     // navigate('Detail', {id});
   };
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={data2}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => {handleOnPress(item.id)}}>
-            <InstaCard image={item.download_url} caption={"uu"}/>
-          </TouchableOpacity>
-        )}
-      />
-    </SafeAreaView>
+    <ReceptionView/>
 
   );
 
@@ -33,12 +24,7 @@ function Home() {
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Instagram" component={Home} />
-        <Stack.Screen name="Detail" component={Detail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ReceptionView/>
   );
 }
 
