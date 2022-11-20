@@ -9,7 +9,10 @@ export default function HomeView() {
   };
   return (
       <View>
-          <Card />
+        <Button
+          title="Enter"
+          onPress={handleOnPress}
+    />
       </View> 
       );
 }

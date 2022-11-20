@@ -1,62 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
-import { IPokemon, IPokemonGetAll } from "../../app/interfaces/Pokemon.interface";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 
 export default function ReceptionView() {
-  const [receptionPokemon, setReceptionPokemon] = useState()
-  let randomPokemon: IPokemonGetAll;
-
-  console.log("MIAM")
-  
-  // useEffect(( ) => {
-  //   const fetchPokemon = async () => {
-  //     new Promise((res: Function, rej: Function) => {
-  //       fetch(`https://pokeapi.co/api/v2/pokemon?limit=1&offset=${Math.floor(Math.random() * 1000)}`)
-  //       .then((pokemon: any) => {
-  //         res(pokemon.json())
-  //       }
-  //       )
-  //     })
-  //   };
-  //   fetchPokemon();
-  
-  //   const fetchDetails = async (pokemon: IPokemonGetAll) => {
-  //     const pokemonDetails =  await fetch(`${pokemon.url}`);
-  //     setReceptionPokemon( await pokemonDetails.json());
-  //   };
-  //   fetchDetails(randomPokemon);
-  // }, []);
+  const [receptionPokemon, setReceptionPokemon] = useState(null);
 
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
-  const getMovies = async () => {
-     try {
-      const response = await fetch('https://reactnative.dev/movies.json');
+  const getPokemon = async () => {
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=1&offset=${Math.floor(
+          Math.random() * 1000
+        )}`
+      );
       const json = await response.json();
-      setData(json.movies);
+      const fetchDetails = await fetch(`${json.results[0].url}`);
+      setReceptionPokemon(await fetchDetails.json());
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    getMovies();
+    getPokemon();
   }, []);
 
-
-  if ( receptionPokemon !== undefined  ) {
-    return (
-      // @ts-ignore
-      <Text style={{margin: 50}}>{JSON.stringify(receptionPokemon.name)}</Text>
-      // <Image source={{ uri: receptionPokemon.sprites. }} style={{ width: 100, height: 100 }} />
-    );
-  } 
   return (
-    <Text style={{margin: 50}}>Loading...</Text>
-  )
-
-  
+    <View style={{ flex: 1, padding: 24 }}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <Text style={{ margin: 50 }}>{receptionPokemon.name}</Text>
+          <Image
+            source={{ uri: receptionPokemon.sprites.front_default }}
+            style={{ width: 100, height: 100 }}
+          />
+        </>
+      )}
+    </View>
+  );
 }
