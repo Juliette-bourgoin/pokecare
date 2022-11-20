@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, Text, View, StyleSheet } from "react-native";
 import { Card } from "../card";
 
 export default function ReceptionView() {
@@ -40,5 +40,10 @@ export default function ReceptionView() {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+
+});
 
 
