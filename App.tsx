@@ -3,21 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { FlatList, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card } from './components/card';
-import { Detail } from './components/detail';
+import HomeView from './components/Home';
+import ReceptionView from './components/reception';
 
-function Home() {
-  const { navigate } = useNavigation();
-  const handleOnPress = (id: string) => {
-    // navigate('Detail', {id});
-  };
-  return (
-    <SafeAreaView style={styles.container}>
-      <Card />
-    </SafeAreaView>
 
-  );
-
-}
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -29,7 +18,7 @@ export default function App() {
       {/* <Stack.Screen name="Care" component={CareView} /> */}
     </Stack.Navigator>
     </NavigationContainer>
-    
+
   );
 }
 

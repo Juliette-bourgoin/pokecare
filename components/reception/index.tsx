@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
+import { Card } from "../card";
 
 export default function ReceptionView() {
   const [receptionPokemon, setReceptionPokemon] = useState(null);
@@ -33,13 +34,11 @@ export default function ReceptionView() {
         <ActivityIndicator />
       ) : (
         <>
-          <Text style={{ margin: 50 }}>{receptionPokemon.name}</Text>
-          <Image
-            source={{ uri: receptionPokemon.sprites.front_default }}
-            style={{ width: 100, height: 100 }}
-          />
+          <Card pokemon={receptionPokemon}/>
         </>
       )}
     </View>
   );
 }
+
+

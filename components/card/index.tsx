@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, Image } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, Image, Button } from "react-native";
 import MyButton from "../button";
 import { Icon } from '@rneui/themed';
+import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 
 
 
-export interface Card {
-	name?: string;
-	type?: string;
-  }
 
-export function Card({ name, type }: Card) {
 
-	const pokemon: any = {
-		name: "Bulbizarre",
-		type: "Terre",
-		health: 3,
-		image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/female/25.png",
-		this: ""
-	};
+export function Card({pokemon}: any) {
+
 
   const [modalVisible, setModalVisible] = useState(false);
+
+	const [number, setNumber] = React.useState(1);
+
+	const getRandomNumber = () => {
+		const randomNumber = Math.floor(Math.random() * 5) + 1;
+		setNumber(randomNumber);
+}
 
 
 
@@ -34,15 +32,20 @@ export function Card({ name, type }: Card) {
         <View style={styles.card}>
           <View style={styles.cardView}>
 					<Image
-						source={{ uri: pokemon.image }}
+						source={{ uri: pokemon.sprites.front_default }}
 						style={styles.image}/>
 					<Text style={styles.name}>{pokemon.name}</Text>
-					<Text style={styles.health}>Niveau de faim : {pokemon.health}</Text>
-					<Text style={styles.type}>Type : {pokemon.type}</Text>
+					<Text style={styles.health}>Niveau de faim : {number}</Text>
+					<Text style={styles.type}>Type : {pokemon.types[0].type.name}</Text>
 					<MyButton title="Rendre à son dresseur"/>
-						<Pressable style={[styles.button, styles.buttonClose]} onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}><Icon name='close' color='#FFF' /></Text>
-            </Pressable>
+
+
+
+					<Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setModalVisible(!modalVisible); getRandomNumber() }}>
+						<Text style={styles.textStyle}><Icon name='close' color='#FFF' /></Text>
+					</Pressable>
+
+
           </View>
         </View>
       </Modal>
@@ -111,6 +114,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: 26,
 		marginBottom: 10,
+		color: "black"
 	},
 	type: {
 		textAlign: "center",
