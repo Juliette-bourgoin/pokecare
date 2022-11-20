@@ -1,13 +1,9 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Card } from './components/card';
 import { Detail } from './components/detail';
-import { InstaCard } from './components/instaCard';
-import type { RandomImagesJSON, RandomImagesJSON2 } from './types';
-
-const data = require('./random-images.json') as RandomImagesJSON[];
-const data2 = require('./random-images-2.json') as RandomImagesJSON2[];
 
 function Home() {
   const { navigate } = useNavigation();
@@ -16,14 +12,7 @@ function Home() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={data2}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => {handleOnPress(item.id)}}>
-            <InstaCard image={item.download_url} caption={"uu"}/>
-          </TouchableOpacity>
-        )}
-      />
+      <Card />
     </SafeAreaView>
 
   );
