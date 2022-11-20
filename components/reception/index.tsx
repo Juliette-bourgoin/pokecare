@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, Text, View, StyleSheet } from "react-native";
+import { ActivityIndicator, Image, Text, View, StyleSheet, ImageBackground } from "react-native";
 import { Card } from "../card";
 
 export default function ReceptionView() {
@@ -29,21 +29,29 @@ export default function ReceptionView() {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <>
-          <Card pokemon={receptionPokemon}/>
-        </>
-      )}
+    <View style={styles.container}>
+			<ImageBackground source={require('../../assets/background-reception.png')} resizeMode="cover" style={styles.image}>
+				{isLoading ? (
+					<ActivityIndicator />
+				) : (
+					<>
+						<Card pokemon={receptionPokemon}/>
+					</>
+				)}
+    		</ImageBackground>
     </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-
+	container: {
+		flex: 1,
+	},
+	image: {
+    flex: 1,
+    justifyContent: "center"
+  },
 });
 
 
