@@ -11,14 +11,23 @@ import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 export function Card({pokemon}: any) {
 
 
+
+
   const [modalVisible, setModalVisible] = useState(false);
 
-	const [number, setNumber] = React.useState(1);
-
 	const getRandomNumber = () => {
-		const randomNumber = Math.floor(Math.random() * 5) + 1;
-		setNumber(randomNumber);
+		const miam = [];
+    for (let i = 0; i < (Math.floor(Math.random() * 5) + 1); i++) {
+      miam.push("🍓");
+    }
+    return <View style={styles.divnourriture}><Text style={styles.health}>Niveau de faim :</Text><Text style={styles.divfaim}>{miam}</Text></View>;
+
 }
+
+
+
+
+
 
 
 
@@ -35,7 +44,18 @@ export function Card({pokemon}: any) {
 						source={{ uri: pokemon.sprites.front_default }}
 						style={styles.image}/>
 					<Text style={styles.name}>{pokemon.name}</Text>
-					<Text style={styles.health}>Niveau de faim : {number}</Text>
+					{/* <Text style={styles.health}>Niveau de faim : {number}</Text> */}
+
+					{getRandomNumber()}
+
+					{/* <Text>Niveau de faim :</Text>
+
+					{[...Array(number || 5)].map((number) => {
+              return <Text>🍓</Text>;
+            })} */}
+
+
+
 					<Text style={styles.type}>Type : {pokemon.types[0].type.name}</Text>
 					<MyButton title="Rendre à son dresseur"/>
 
@@ -125,8 +145,21 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 4,
 	},
+	divnourriture: {
+		justifyContent: "center",
+		alignContent: "center",
+		alignItems: "center",
+		marginBottom: 10
+	},
+	divfaim: {
+		width: 90,
+		borderColor: "black",
+		borderWidth: 1,
+		borderStyle: "solid"
+	},
 	health: {
 		fontSize: 20,
+		marginBottom: 10,
 	}
 });
 
