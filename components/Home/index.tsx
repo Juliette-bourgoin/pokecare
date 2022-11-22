@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Button, View, StyleSheet, ImageBackground, Text } from "react-native";
+import { View, StyleSheet, ImageBackground, Text } from "react-native";
+import MyButton from "../button";
 import { Card } from "../card";
 export default function HomeView() {
   const { navigate } = useNavigation();
@@ -12,7 +13,7 @@ export default function HomeView() {
   return (
       <View style={styles.container}>
 				<ImageBackground source={require('../../assets/background-home.png')} resizeMode="cover" style={styles.image}>
-					<Button
+					<MyButton
           title="Entrer"
           onPress={handleOnPress}/>
     		</ImageBackground>
