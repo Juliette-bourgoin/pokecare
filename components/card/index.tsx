@@ -13,6 +13,10 @@ export function Card({pokemon}: any) {
 
 
 
+
+
+
+
   const [modalVisible, setModalVisible] = useState(false);
 
 	const getRandomNumber = () => {
