@@ -5,12 +5,18 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  View
+  View,
+	ImageBackground,
+	TouchableOpacity,
+	Image
 } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { IBerry } from "../../app/interfaces/Berry.interface";
 import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 import { Card } from "../card";
+
+
+
 
 export default function CareView({route}: any) {
   const pokemonInstance = route.params
@@ -52,10 +58,18 @@ export default function CareView({route}: any) {
 
   const [modalVisible, setModalVisible] = useState(false);
   const { navigate } = useNavigation();
-     
-  
+
+
   return (
     <View style={styles.centeredView}>
+			<ImageBackground
+        source={require("../../assets/background-care.png")}
+        resizeMode="cover"
+        style={styles.image}
+      >
+				<Pressable style={[styles.button_food]} onPress={() => setModalVisible(true)}>
+        	<Text style={styles.text_food}>Donner à manger 🫐</Text>
+      	</Pressable>
       <Modal
         animationType="slide"
         transparent={true}
@@ -67,7 +81,21 @@ export default function CareView({route}: any) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View>
-              <SelectDropdown
+							<View style={styles.container_food}>
+								<TouchableOpacity style={styles.baie} onPress={() => setModalVisible(!modalVisible)}>
+									<Image style={styles.image_baie} source={require('../../assets/cheri-berry.png')}/>
+									<Text>Cheri</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.baie} onPress={() => setModalVisible(!modalVisible)}>
+									<Image style={styles.image_baie} source={require('../../assets/leppa-berry.png')}/>
+									<Text>Leppa</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.baie} onPress={() => setModalVisible(!modalVisible)}>
+									<Image style={styles.image_baie} source={require('../../assets/oran-berry.png')}/>
+									<Text>Oran</Text>
+								</TouchableOpacity>
+							</View>
+              {/* <SelectDropdown
                 data={berries.map((e) => e.name)}
                 onSelect={(selectedItem, index) => {
                   setSelectedBerry(selectedItem);
@@ -78,24 +106,25 @@ export default function CareView({route}: any) {
                 rowTextForSelection={(item, index) => {
                   return item;
                 }}
-              />
+              /> */}
             </View>
-            <Pressable
+            {/* <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {setModalVisible(!modalVisible); updateHealth()}}
             >
               <Text style={styles.textStyle}>Feed this {selectedBerry?.name}</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </Modal>
       <Card pokemon = {pokemon}/>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
+      {/* <Pressable
+        style={[styles.button_food]}
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.textStyle}>Feed a pokemon</Text>
-      </Pressable>
+      </Pressable> */}
+			</ImageBackground>
     </View>
   );
 }
@@ -105,14 +134,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
+	image: {
+    flex: 1,
+    justifyContent: "center",
+		width: '100%',
+		alignItems: "center"
+  },
+	container_food: {
+		justifyContent: "center",
+		flexDirection: "row",
+		marginBottom: 14
+	},
+	baie: {
+		marginRight: 14,
+		marginLeft: 14,
+		justifyContent: "center",
+		alignContent: "center",
+		alignItems: "center"
+	},
+	image_baie: {
+		marginBottom: 8
+	},
   dropdownRowImage: { width: 45, height: 45, resizeMode: "cover" },
   modalView: {
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 30,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -128,6 +177,18 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
+	button_food: {
+		borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+		backgroundColor: "white",
+		width: "40%",
+		marginTop: 40,
+		shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+	},
   buttonOpen: {
     backgroundColor: "#F194FF",
   },
@@ -139,6 +200,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+	text_food: {
+		color: "black",
+    fontWeight: "bold",
+    textAlign: "center",
+	},
   modalText: {
     marginBottom: 15,
     textAlign: "center",
