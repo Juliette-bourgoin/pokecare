@@ -1,4 +1,4 @@
-import { ISprites } from "./Sprites.interfaces";
+import { ISprite } from "./Sprite.interfaces";
 
 export interface IPokemonGetAll {
   name: string;
@@ -7,5 +7,7 @@ export interface IPokemonGetAll {
 
 export interface IPokemon {
   name: string;
-  sprites: ISprites[]
+  sprite: ISprite;
+  health: number;
+  type: string
 }
