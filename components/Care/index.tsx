@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
   Modal,
   Pressable,
@@ -8,12 +8,14 @@ import {
   View,
 	ImageBackground,
 	TouchableOpacity,
-	Image
+	Image,
+	Animated
 } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
 import { IBerry } from "../../app/interfaces/Berry.interface";
 import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 import { Card } from "../card";
+import { Button } from 'react-native-paper';
+import  MyButton from '../button';
 
 
 
@@ -26,6 +28,7 @@ export default function CareView({route}: any) {
     health: pokemonInstance.health,
     type: pokemonInstance.type
   });
+
 
   console.log(pokemon)
 
@@ -59,6 +62,29 @@ export default function CareView({route}: any) {
   const [modalVisible, setModalVisible] = useState(false);
   const { navigate } = useNavigation();
 
+	const anim = useRef(new Animated.Value(0));
+
+	const shake = useCallback(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(anim.current, {
+          toValue: -2,
+          duration: 50,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 2,
+          duration: 50,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 0,
+          duration: 50,
+        }),
+      ]),
+      { iterations: 3 }
+    ).start();
+		setModalVisible(true)
+  }, []);
+
 
   return (
     <View style={styles.centeredView}>
@@ -67,9 +93,19 @@ export default function CareView({route}: any) {
         resizeMode="cover"
         style={styles.image}
       >
-				<Pressable style={[styles.button_food]} onPress={() => setModalVisible(true)}>
+
+				<Animated.View style={{ transform: [{ translateX: anim.current }] }} >
+					<Pressable style={[styles.button_food]} onPress={() => setModalVisible(true)}>
+						<MyButton onPress={shake} title="Donner à manger 🫐"></MyButton>
+					</Pressable>
+      	</Animated.View>
+
+				{/* <Pressable style={[styles.button_food]} onPress={() => setModalVisible(true)}>
         	<Text style={styles.text_food}>Donner à manger 🫐</Text>
-      	</Pressable>
+      	</Pressable> */}
+
+
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -178,11 +214,10 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
 	button_food: {
-		borderRadius: 20,
+		borderRadius: 30,
     padding: 10,
     elevation: 2,
 		backgroundColor: "white",
-		width: "40%",
 		marginTop: 40,
 		shadowColor: '#171717',
     shadowOffset: {width: 0, height: 0},
