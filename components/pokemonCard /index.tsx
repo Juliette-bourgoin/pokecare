@@ -12,19 +12,21 @@ import MyButton from "../button";
 import { Icon } from "@rneui/themed";
 import { styles } from "../styles/styles";
 
-export function PokemonCard({ pokemon }: any) {
+export function PokemonCard({ pokemon, style }: any) {
   const getHealthBar = (health: number) => {
     const miam = [];
     for (let i = 0; i < health; i++) {
       miam.push("🍓");
     }
     return (
-      <View style={styles.divnourriture}>
-        <Text style={styles.health}>Niveau de faim :</Text>
-        <View style={styles.divfaim}>
-          <Text>{miam}</Text>
-        </View>
-      </View>
+			<View style={style}>
+				<View style={styles.divnourriture}>
+					<Text style={styles.health}>Niveau de faim :</Text>
+					<View style={styles.divfaim}>
+						<Text>{miam}</Text>
+					</View>
+				</View>
+			</View>
     );
   };
 
@@ -36,7 +38,6 @@ export function PokemonCard({ pokemon }: any) {
           <Text style={styles.name}>{pokemon.name.split('-')[0].charAt(0).toUpperCase() + pokemon.name.split('-')[0].slice(1)}</Text>
           {getHealthBar(pokemon.health)}
           <Text style={styles.type}>Type : {pokemon.type}</Text>
-
           <MyButton
             title="Rendre à son dresseur"
             style={styles.button_dresseur}
