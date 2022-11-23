@@ -18,6 +18,7 @@ import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 import { getHealthBar } from "../../app/models/pokemon.helpers";
 import MyButton from "../button";
 import { Card } from "../card";
+import { PokemonCard } from "../pokemonCard ";
 import { styles as cardStyles } from "../styles/styles";
 
 export default function CareView({ route }: any) {
@@ -110,7 +111,11 @@ export default function CareView({ route }: any) {
         resizeMode="cover"
         style={styles.image}
       >
-        <Animated.View style={{ transform: [{ translateX: anim.current }] }}>
+
+        <PokemonCard pokemon={pokemon} />
+
+        <View>
+            <Animated.View style={{ transform: [{ translateX: anim.current }] }}>
           <Pressable
             style={[styles.button_food]}
             onPress={() => setModalVisible(true)}
@@ -175,7 +180,7 @@ export default function CareView({ route }: any) {
                 </View>
               ) : (
                 <View style={styles.baie}>
-                  <Text>Ton {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} n'a plus faim ! </Text>
+                  <Text>Ton {pokemon.name.split('-')[0].charAt(0).toUpperCase() + pokemon.name.split('-')[0].slice(1)} n'a plus faim ! </Text>
                   <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setModalVisible(!modalVisible);}}>
                     <Icon name='close' color='#FFF' />
                   </Pressable>
@@ -184,7 +189,8 @@ export default function CareView({ route }: any) {
               )}
             </View>
           </View>
-        </Modal>
+        </Modal> 
+        </View>
       </ImageBackground>
     </View>
   );
@@ -245,8 +251,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 10,
     elevation: 2,
-    position:"absolute",
-    marginTop: 200,
     backgroundColor: "white",
     shadowColor: "#171717",
     shadowOffset: { width: 0, height: 0 },

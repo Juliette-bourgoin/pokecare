@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -7,10 +7,12 @@ import {
   View,
   StyleSheet,
   ImageBackground,
+  Pressable,
+  Animated,
 } from "react-native";
 import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 import MyButton from "../button";
-import { Card } from "../card";
+import { PokemonCard } from "../pokemonCard ";
 
 export default function ReceptionView() {
   const [receptionPokemon, setReceptionPokemon] = useState<IPokemon>();
@@ -19,6 +21,7 @@ export default function ReceptionView() {
   const getRandomNumber = () => {
     return Math.floor(Math.random() * 5) + 1;
   };
+  const anim = useRef(new Animated.Value(0));
   const getPokemon = async () => {
     try {
       const response = await fetch(
@@ -46,6 +49,26 @@ export default function ReceptionView() {
     getPokemon();
   }, []);
 
+  const shake = useCallback(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(anim.current, {
+          toValue: -2,
+          duration: 50,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 2,
+          duration: 50,
+        }),
+        Animated.timing(anim.current, {
+          toValue: 0,
+          duration: 50,
+        }),
+      ]),
+      { iterations: 3 }
+    ).start();
+  }, []);
+
   const handleClick = () => {
     console.log(1223)
     navigate("Soins",receptionPokemon)
@@ -63,10 +86,19 @@ export default function ReceptionView() {
           <ActivityIndicator />
         ) : (
           <>
-            <Card pokemon={receptionPokemon} />
-						<View style={styles.container_soin}>
-            	<MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin}/>
-						</View>
+          <Animated.View style={{ transform: [{ translateX: anim.current }] }}>
+            <Pressable 
+              style={[styles.button, styles.buttonOpen]} onPress={() => {
+                getPokemon();
+                shake();
+              }}>
+              <Text style={styles.textStyle}>Clique pour accueillir un pokemon</Text>
+            </Pressable>
+          </Animated.View>
+          <PokemonCard pokemon={receptionPokemon} />
+          <View style={styles.container_soin}>
+            <MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin}/>
+          </View>
           </>
         )}
       </ImageBackground>
@@ -87,6 +119,29 @@ const styles = StyleSheet.create({
 		marginLeft: 80,
 		marginRight: 80
 	},
+  button: {
+    borderRadius: 20,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
+    elevation: 2,
+		shadowColor: 'black',
+		shadowOpacity: 1,
+		shadowRadius: 6,
+    shadowOffset: {width: 0, height: 0},
+  },
+  buttonOpen: {
+    backgroundColor: "#294935",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+		marginBottom: 0,
+		alignItems: "center",
+		alignContent: "center",
+  },
 	button_soin: {
 		backgroundColor: "#DFF7E8",
     color: "white",

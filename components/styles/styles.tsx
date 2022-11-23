@@ -59,6 +59,7 @@ export const styles = StyleSheet.create({
 	button_dresseur: {
 		backgroundColor: "#CBDEF3",
 		paddingTop: 10,
+    borderRadius: 20,
 		paddingBottom: 10,
 		paddingRight: 20,
 		paddingLeft: 20,
