@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { IPokemon } from "../../app/interfaces/Pokemon.interface";
 import MyButton from "../button";
-import { PokemonCard } from "../pokemonCard ";
+import { PokemonCard } from "../pokemonCard";
 
 export default function ReceptionView() {
   const [receptionPokemon, setReceptionPokemon] = useState<IPokemon>();
@@ -97,7 +97,7 @@ export default function ReceptionView() {
           </Animated.View>
           <PokemonCard pokemon={receptionPokemon} />
           <View style={styles.container_soin}>
-            <MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin}/>
+            <MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin} />
           </View>
           </>
         )}
