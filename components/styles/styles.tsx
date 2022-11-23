@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 10
 	},
 	divfaim: {
-		width: 96,
+		width: 128,
 		borderColor: "#B1CDBB",
 		borderWidth: 1,
 		borderStyle: "dotted",
