@@ -1,21 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, ImageBackground, Text } from "react-native";
+import { View, StyleSheet, ImageBackground, Text, Pressable } from "react-native";
 import MyButton from "../button";
 import { Card } from "../card";
 export default function HomeView() {
   const { navigate } = useNavigation();
   const handleOnPress = () => {
-    navigate('Reception', {});
+    navigate('Réception', {});
   };
 
 
   return (
       <View style={styles.container}>
 				<ImageBackground source={require('../../assets/background-home.png')} resizeMode="cover" style={styles.image}>
-					<MyButton
+					{/* <MyButton
           title="Entrer"
-          onPress={handleOnPress}/>
+          onPress={handleOnPress}
+					style={styles.button}/> */}
+					<Pressable style={styles.button} onPress={handleOnPress}>
+        		<Text style={styles.text}>Clique pour entrer</Text>
+      		</Pressable>
     		</ImageBackground>
       </View>
       );
@@ -27,6 +31,25 @@ const styles = StyleSheet.create({
 	},
 	image: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+		width: "100%",
+		alignItems: "center"
   },
+	button: {
+		backgroundColor: "#DFF7E8",
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
+		marginTop: 340,
+		borderRadius: 20,
+		shadowColor: 'black',
+		shadowOpacity: 0.8,
+		shadowRadius: 6,
+    shadowOffset: {width: 0, height: 0},
+	},
+	text: {
+		textAlign: "center",
+		fontWeight: "700"
+	}
 });

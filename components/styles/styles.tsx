@@ -19,12 +19,21 @@ export const styles = StyleSheet.create({
 		right: -10,
 		top: -10,
 		backgroundColor: "#19462A",
-		color: "white"
+		color: "white",
+		alignContent: "center",
+		alignItems: "center",
+		borderRadius: 100,
+	},
+	cross_close: {
+		marginTop: 6
 	},
   cardView: {
     backgroundColor: "white",
     borderRadius: 10,
-    padding: 25,
+    paddingTop: 25,
+		paddingBottom: 25,
+		paddingRight: 40,
+		paddingLeft: 40,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -37,16 +46,34 @@ export const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
     elevation: 2,
+		shadowColor: 'black',
+		shadowOpacity: 1,
+		shadowRadius: 6,
+    shadowOffset: {width: 0, height: 0},
   },
+	button_dresseur: {
+		backgroundColor: "#CBDEF3",
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
+    elevation: 2,
+	},
   buttonOpen: {
     backgroundColor: "#294935",
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+		marginBottom: 0,
+		alignItems: "center",
+		alignContent: "center",
   },
   modalText: {
     marginBottom: 15,
@@ -61,6 +88,7 @@ export const styles = StyleSheet.create({
 	type: {
 		textAlign: "center",
 		fontSize: 20,
+		marginBottom: 20,
 	},
 	image: {
 		width: 180,
@@ -75,10 +103,15 @@ export const styles = StyleSheet.create({
 		marginBottom: 10
 	},
 	divfaim: {
-		width: 90,
-		borderColor: "black",
+		width: 96,
+		borderColor: "#B1CDBB",
 		borderWidth: 1,
-		borderStyle: "solid"
+		borderStyle: "dotted",
+		justifyContent: "center",
+		alignItems: "center",
+		alignContent: "center",
+		padding: 4,
+		borderRadius: 4,
 	},
 	health: {
 		fontSize: 20,

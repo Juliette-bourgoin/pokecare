@@ -20,7 +20,9 @@ export function Card({pokemon}: any) {
     return (
       <View style={styles.divnourriture}>
         <Text style={styles.health}>Niveau de faim :</Text>
-        <Text style={styles.divfaim}>{miam}</Text>
+				<View style={styles.divfaim}>
+        	<Text>{miam}</Text>
+				</View>
       </View>
     );
   };
@@ -40,12 +42,11 @@ export function Card({pokemon}: any) {
 					<Text style={styles.name}>{pokemon.name}</Text>
 					{getHealthBar(pokemon.health)}
 					<Text style={styles.type}>Type : {pokemon.type}</Text>
-					<MyButton title="Rendre à son dresseur"/>
 
-
+					<MyButton title="Rendre à son dresseur" style={styles.button_dresseur} />
 
 					<Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setModalVisible(!modalVisible);}}>
-						<Text style={styles.textStyle}><Icon name='close' color='#FFF' /></Text>
+						<Text style={styles.cross_close}><Icon name='close' color='#FFF' /></Text>
 					</Pressable>
 
 
@@ -53,7 +54,7 @@ export function Card({pokemon}: any) {
         </View>
       </Modal>
       <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Clique pour accueil un pokemon</Text>
+        <Text style={styles.textStyle}>Clique pour accueillir un pokemon</Text>
       </Pressable>
     </View>
   );

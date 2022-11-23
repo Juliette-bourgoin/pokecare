@@ -48,7 +48,7 @@ export default function ReceptionView() {
 
   const handleClick = () => {
     console.log(1223)
-    navigate("Care",receptionPokemon)
+    navigate("Soins",receptionPokemon)
 
   }
 
@@ -64,8 +64,9 @@ export default function ReceptionView() {
         ) : (
           <>
             <Card pokemon={receptionPokemon} />
-
-            <MyButton title="Take care of the Pokemons" onPress={handleClick}/>
+						<View style={styles.container_soin}>
+            	<MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin}/>
+						</View>
           </>
         )}
       </ImageBackground>
@@ -81,4 +82,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+	container_soin: {
+		marginBottom: 60,
+		marginLeft: 80,
+		marginRight: 80
+	},
+	button_soin: {
+		backgroundColor: "#DFF7E8",
+    color: "white",
+    fontSize: 30,
+		borderRadius: 20,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
+    elevation: 2,
+		shadowColor: 'black',
+		shadowOpacity: 0.8,
+		shadowRadius: 6,
+    shadowOffset: {width: 0, height: 0},
+	}
 });
