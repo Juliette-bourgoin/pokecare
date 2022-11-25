@@ -8,18 +8,13 @@ import {
   Modal,
   Pressable,
   StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
+  Text, TouchableOpacity,
+  View
 } from "react-native";
 import { IBerry } from "../../app/interfaces/Berry.interface";
 import { IPokemon } from "../../app/interfaces/Pokemon.interface";
-import { getHealthBar } from "../../app/models/pokemon.helpers";
 import MyButton from "../button";
-import { Card } from "../card";
-import { PokemonCard } from "../pokemonCard ";
-import { styles as cardStyles } from "../styles/styles";
+import { PokemonCard } from "../pokemonCard";
 
 export default function CareView({ route }: any) {
   const pokemonInstance = route.params;
@@ -45,8 +40,6 @@ export default function CareView({ route }: any) {
     },
   ];
 
-  const [selectedBerry, setSelectedBerry] = useState<IBerry>(berries[0]);
-
   const updateHealth = () => {
     const updatedPokemon: IPokemon = {
       ...pokemon,
@@ -54,32 +47,7 @@ export default function CareView({ route }: any) {
     };
     setPokemon(updatedPokemon);
   };
-
-  // useEffect(() => {}, []);
-
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-  // historique
-
   const [modalVisible, setModalVisible] = useState(false);
-  const { navigate } = useNavigation();
 
   const anim = useRef(new Animated.Value(0));
 

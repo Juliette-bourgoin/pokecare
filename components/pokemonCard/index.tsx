@@ -1,18 +1,13 @@
-import React, { useCallback, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import {
-  Alert,
-  Modal,
-  Text,
-  Pressable,
-  View,
-  Image,
-  Animated,
+  Image, Text, View
 } from "react-native";
 import MyButton from "../button";
-import { Icon } from "@rneui/themed";
 import { styles } from "../styles/styles";
 
 export function PokemonCard({ pokemon, style }: any) {
+  const { navigate } = useNavigation();
   const getHealthBar = (health: number) => {
     const miam = [];
     for (let i = 0; i < health; i++) {
@@ -41,6 +36,9 @@ export function PokemonCard({ pokemon, style }: any) {
           <MyButton
             title="Rendre à son dresseur"
             style={styles.button_dresseur}
+            onPress={()=>{
+              navigate("Accueil",pokemon)
+            }}
           />
         </View>
       </View>

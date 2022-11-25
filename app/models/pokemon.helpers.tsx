@@ -1,4 +1,6 @@
-import { Text, View } from "react-native";
+import { Icon } from "@rneui/base";
+import React, { useState } from "react";
+import { Modal, Pressable, Text, View } from "react-native";
 import { styles } from "../../components/styles/styles";
 import { IPokemon } from "../interfaces/Pokemon.interface";
 
@@ -14,5 +16,3 @@ export const getHealthBar = (health: number) => {
     </View>
   );
 };
-
-export const giveBackPokemon = (pokemon: IPokemon) => {};
