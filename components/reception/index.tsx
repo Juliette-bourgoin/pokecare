@@ -86,15 +86,17 @@ export default function ReceptionView() {
           <ActivityIndicator />
         ) : (
           <>
-          <Animated.View style={{ transform: [{ translateX: anim.current }] }}>
-            <Pressable 
-              style={[styles.button, styles.buttonOpen]} onPress={() => {
-                getPokemon();
-                shake();
-              }}>
-              <Text style={styles.textStyle}>Clique pour accueillir un pokemon</Text>
-            </Pressable>
-          </Animated.View>
+					<View style={styles.container_autre_pokemon}>
+						<Animated.View style={{ transform: [{ translateX: anim.current }] }}>
+							<Pressable
+								style={[styles.button, styles.buttonOpen]} onPress={() => {
+									getPokemon();
+									shake();
+								}}>
+								<Text style={styles.textStyle}>Clique pour accueillir un autre pokemon</Text>
+							</Pressable>
+						</Animated.View>
+					</View>
           <PokemonCard pokemon={receptionPokemon} />
           <View style={styles.container_soin}>
             <MyButton title="Prendre soin du pokémon 🩺" onPress={handleClick} style={styles.button_soin} />
@@ -115,9 +117,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 	container_soin: {
-		marginBottom: 60,
+		marginBottom: 160,
 		marginLeft: 80,
 		marginRight: 80
+	},
+	container_autre_pokemon: {
+		paddingTop: 50,
+		paddingLeft: 50,
+		paddingRight: 50,
 	},
   button: {
     borderRadius: 20,

@@ -157,7 +157,7 @@ export default function CareView({ route }: any) {
               )}
             </View>
           </View>
-        </Modal> 
+        </Modal>
         </View>
       </ImageBackground>
     </View>
@@ -217,13 +217,18 @@ const styles = StyleSheet.create({
   },
   button_food: {
     borderRadius: 30,
-    padding: 10,
+    paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
     elevation: 2,
     backgroundColor: "white",
     shadowColor: "#171717",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,
     shadowRadius: 3,
+		marginBottom: 180,
+		marginTop: -50
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
